@@ -30,4 +30,18 @@ public class ContatoController {
     }
     
     // FAZER MÉTODO ALTERAR, EXCLUIR E BUSCAR CONTATO PELO NOME
+    public void alterar(long id, String nome, String apelido, String dtNascimento) throws SQLException, ParseException{
+        Contato contato = new Contato();
+        contato.setId(id);
+        contato.setNome(nome);
+        contato.setApelido(apelido);
+        contato.setDtNascimento(this.formatarData(dtNascimento));
+        new ContatoDao().alterar(contato);
+    }
+    
+    public void excluir(long id) throws SQLException{
+        new ContatoDao().excluir(id);
+    }
+    
+    
 }
