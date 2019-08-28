@@ -56,5 +56,5 @@ public class ContatoDao extends GenericDao{
         
         return contatos;
     }
-
+    
 }
