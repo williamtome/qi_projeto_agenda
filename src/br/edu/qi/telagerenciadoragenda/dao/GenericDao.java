@@ -46,10 +46,13 @@ public abstract class GenericDao {
         connection.close();
     }
     
-    protected void delete(String deleteSql, Object id) throws SQLException{
+    protected void delete(String deleteSql, Object... params) throws SQLException{
         PreparedStatement smtm = getConnection().prepareStatement(deleteSql);
         
-        smtm.setObject(1, id);
+        for (int i = 0; i < params.length; i++) {
+            smtm.setObject(i+1, params[i]);
+        }        
+        
         smtm.execute();
         smtm.close();
         connection.close();
