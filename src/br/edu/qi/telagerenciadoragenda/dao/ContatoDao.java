@@ -57,4 +57,27 @@ public class ContatoDao extends GenericDao{
         return contatos;
     }
     
+    public Contato findByName(String nome) throws SQLException{
+        String select = "SELECT * FROM contato WHERE nome = ?";
+        Contato contato = null;
+        PreparedStatement smtm = getConnection().prepareStatement(select);
+        
+        smtm.setString(1, nome);
+        ResultSet result = smtm.executeQuery();
+        
+        while(result.next()){
+            contato = new Contato();
+            contato.setId(result.getLong("id"));
+            contato.setNome(result.getString("nome"));
+            contato.setApelido(result.getString("apelido"));
+            contato.setDtNascimento(result.getDate("data_nascimento"));
+        }
+        
+        result.close();
+        smtm.close();
+        getConnection().close();
+        
+        return contato;
+    }
+    
 }
