@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class ContatoController {
     
@@ -37,6 +38,17 @@ public class ContatoController {
         contato.setApelido(apelido);
         contato.setDtNascimento(this.formatarData(dtNascimento));
         new ContatoDao().alterar(contato);
+    }
+    
+    public List listaContatos(){
+        ContatoDao dao = new ContatoDao();
+        try {
+            dao.findContatos();
+        } catch (Exception e) {
+            System.out.println("Problemas ao localizar contato! " + e.getLocalizedMessage());
+        }
+        
+        return null;
     }
     
     public void excluir(long id) throws SQLException{
